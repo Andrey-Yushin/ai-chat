@@ -15,6 +15,8 @@
    ```bash
    # Клонируйте репозиторий
    git clone https://github.com/Andrey-Yushin/ai-chat.git
+   # Перейдите в директорию проекта
+   cd ai-chat
       ```
 
 3. **Настройка VSCode**

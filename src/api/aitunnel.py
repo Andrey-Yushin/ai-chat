@@ -165,11 +165,12 @@ class AITunnelClient:
 
             if data:
                 total = data.get('balance', 0)
-                used = data.get('budget', 0)
+                # used = data.get('budget', 0)
 
             # Вычисление доступного баланса (всего кредитов минус использовано)
-            balans = total - used
-            return f"${balans:.2f}"
+            # balans = total - used
+
+            return f"${total:.2f}"
 
         except Exception as e:
             # Формирование сообщения об ошибке
