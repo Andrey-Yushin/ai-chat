@@ -15,7 +15,7 @@ class AITunnelClient:
     языковым моделям (GPT, Claude и др.) через единый API интерфейс.
     """
 
-    def __init__(self):
+    def __init__(self, on_balance_update=None):
         """
         Инициализация клиента AITunnel.
 
@@ -30,6 +30,9 @@ class AITunnelClient:
         """
         # Инициализация логгера для отслеживания работы клиента
         self.logger = AppLogger()
+
+        # Сохраняем функцию
+        self.on_balance_update = on_balance_update
 
         # Получение необходимых параметров из переменных окружения
         self.api_key = os.getenv("AITUNNEL_API_KEY")  # API ключ для авторизации
@@ -133,6 +136,10 @@ class AITunnelClient:
             # Проверка на ошибки HTTP
             response.raise_for_status()
 
+            # Проверяем, передана ли функция
+            if self.on_balance_update:
+                self.on_balance_update()  # Вызываем функцию, которая обновит баланс
+
             # Логирование успешного получения ответа
             self.logger.info("Successfully received response from API")
 
@@ -162,14 +169,13 @@ class AITunnelClient:
             )
             # Получение данных из ответа
             data = response.json()
+            print(data)
 
             if data:
+                # Весь баланс на счету
                 total = data.get('balance', 0)
-                # used = data.get('budget', 0)
-
-            # Вычисление доступного баланса (всего кредитов минус использовано)
-            # balans = total - used
-
+                # Оставшийся бюджет
+                budget = data.get('budget', 0)
             return f"${total:.2f}"
 
         except Exception as e:
