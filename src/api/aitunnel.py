@@ -89,7 +89,7 @@ class AITunnelClient:
             return [
                 {
                     "id": model["id"],     # Идентификатор модели для API
-                    "owned_by": model["owned_by"]   # Человекочитаемое название модели
+                    "owned_by": model["owned_by"]   # Разработчик модели
                 }
                 for model in models_data["data"]
             ]
