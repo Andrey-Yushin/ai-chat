@@ -1,8 +1,8 @@
 
 import os       # Библиотека для работы с операционной системой и переменными окружения
 import smtplib  # Библиотека для работы с почтой
-from email.mime.text import MIMEText
-from email.header import Header
+from email.mime.text import MIMEText  # Класс для отправки текста по почте на русском языке
+from email.header import Header  # Класс для кодировки темы письма на русский язык
 from dotenv import load_dotenv  # Библиотека для загрузки переменных окружения из .env файла
 from utils.logger import AppLogger  # Импорт собственного логгера для отслеживания работы (будет рассмотрен в следующей части урока)
 
