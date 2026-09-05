@@ -125,7 +125,8 @@ EMAIL_RECIPIENT=your_email_for_notification_here
 │   │   ├── analytics.py   # Аналитика использования
 │   │   ├── cache.py       # Кэширование
 │   │   ├── logger.py      # Система логирования
-│   │   └── monitor.py     # Мониторинг системы
+│   │   ├── monitor.py     # Мониторинг системы
+│   │   └── notifications.py  # Отправка уведомлений
 │   ├── main_simple.py     # Упрощенная версия main.py с урезанным функционалом
 │   └── main.py            # Точка входа приложения
 ├── .env.example           # Пример конфигурации
