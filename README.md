@@ -91,19 +91,20 @@ chmod +x bin/aichat
 
 Создайте файл `.env` в корневой директории со следующим содержимым:
 ```
-AITUNNEL_API_KEY=ваш_api_ключ
+OPENROUTER_API_KEY=your_api_key_here
 BASE_URL=https://api.aitunnel.ru/v1
 DEBUG=False
 LOG_LEVEL=INFO
 MAX_TOKENS=1000
 TEMPERATURE=0.7
+EMAIL_ADDRESS=email_here
+EMAIL_PASS=email_pass_here
+EMAIL_RECIPIENT=your_email_for_notification_here
 ```
 
 ## Структура проекта
 
 ```
-├── assets/                # Ресурсы приложения
-│   └── icon.ico           # Иконка приложения
 ├── bin/                   # Скомпилированные исполняемые файлы
 ├── build/                 # Временные файлы сборки
 ├── exports/               # Директория для экспортированных чатов
@@ -185,4 +186,4 @@ TEMPERATURE=0.7
 - **API интеграция (api/)**
   - Безопасное взаимодействие с AITUNNEL
   - Обработка ошибок и повторные попытки
-  - Поддержка различных моделей AI (более 215 моделей, в том числе более 20-ти бесплатных)
+  - Поддержка различных моделей AI (305 моделей)
