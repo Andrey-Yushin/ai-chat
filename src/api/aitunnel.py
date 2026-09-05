@@ -145,6 +145,18 @@ class AITunnelClient:
             # Логирование успешного получения ответа
             self.logger.info("Successfully received response from API")
 
+            total, budget = self.get_balance()
+            # Уведомляем о низком балансе
+            if total < 100:
+                self.notification.send_balance_notification(
+                    message=f"Ваш баланс: {total:.2f}₽",
+                    subject="Работа AITUNNEL будет приостановлена"
+                )
+            # Уведомляем об оставшемся бюджете
+            self.notification.send_balance_notification(
+                message=f"Осталось запросов на {budget:.2f}₽"
+            )
+
             # Возврат данных ответа
             return response.json()
 
@@ -177,11 +189,10 @@ class AITunnelClient:
                 total = data.get('balance', 0)
                 # Оставшийся бюджет
                 budget = data.get('budget', 0)
-
-                self.notification.send_balance_notification(
-                    message=f"Осталось запросов на {budget:.2f}₽"
-                )
-            return f"{total:.2f}₽"
+                return total, budget
+            else:
+                self.logger.warning("Empty response from balance API")
+                return 0, 0
 
         except Exception as e:
             # Формирование сообщения об ошибке
