@@ -27,11 +27,11 @@ class ChatApp:
         - Система аналитики для сбора статистики
         - Система мониторинга для отслеживания производительности
         """
-        # Инициализация основных компонентов
+        # Создание клиента для работы с AI API
         self.api_client = AITunnelClient(
             # Передаем метод update_balance как callback
             on_balance_update = self.update_balance
-            )       # Создание клиента для работы с AI API
+            )
         self.cache = ChatCache()                   # Инициализация системы кэширования
         self.logger = AppLogger()                  # Инициализация системы логирования
         self.analytics = Analytics(self.cache)     # Инициализация системы аналитики с передачей кэша

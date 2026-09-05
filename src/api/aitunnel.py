@@ -3,6 +3,7 @@ import requests  # Библиотека для выполнения HTTP-зап�
 import os       # Библиотека для работы с операционной системой и переменными окружения
 from dotenv import load_dotenv  # Библиотека для загрузки переменных окружения из .env файла
 from utils.logger import AppLogger  # Импорт собственного логгера для отслеживания работы (будет рассмотрен в следующей части урока)
+from utils.notifications import EmailNotification  # Модуль для отправки уведомлений на почту
 
 # Загрузка переменных окружения из .env файла при импорте модуля
 load_dotenv()
@@ -30,6 +31,7 @@ class AITunnelClient:
         """
         # Инициализация логгера для отслеживания работы клиента
         self.logger = AppLogger()
+        self.notification = EmailNotification()
 
         # Сохраняем функцию
         self.on_balance_update = on_balance_update
@@ -169,14 +171,17 @@ class AITunnelClient:
             )
             # Получение данных из ответа
             data = response.json()
-            print(data)
 
             if data:
                 # Весь баланс на счету
                 total = data.get('balance', 0)
                 # Оставшийся бюджет
                 budget = data.get('budget', 0)
-            return f"${total:.2f}"
+
+                self.notification.send_balance_notification(
+                    message=f"Осталось запросов на {budget:.2f}₽"
+                )
+            return f"{total:.2f}₽"
 
         except Exception as e:
             # Формирование сообщения об ошибке
